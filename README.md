@@ -1,10 +1,16 @@
 # PadronServelChile
-Este repositorio es para obtener de una manera automática los registros desde el sitio de Servel (servel.cl) de todos los ciudadanos registrados para votar.
+Este repositorio es para obtener de una manera automática en un archivo separado por comas (CSV) los registros de todos los ciudadanos registrados para votar (desde servel.cl).
 
-Al estar hechos en bash, estos scripts están hechos para que cualquier usuario de Linux (y probablemente Mac) pueda llegar y descargar estos archivos. Sólo necesitas tener instalado lo siguiente:
+Son sólo scripts en bash por lo que cualquier usuario de Linux (y probablemente Mac) pueda llegar y usarlos. Son principalmente 2 archivos:
+- descargar.sh: descarga la lista de archivos de las comunas desde el mismo Servel
+- parsear.sh: lee los archivos .pdf con pdftotext (debe estar instalado) para luego pasar esos archivos de texto a un formato CSV.
+
+Para usar los scripts sólo necesitas tener instalado lo siguiente:
 
 - xmlstarlet http://xmlstar.sourceforge.net/, este probablemente tengas que instalar
 - pdftotext, este está en la gran mayoría de las distros de Linux
 - wget, este debería estar instalado
 - sed, este debería estar instalado
 - xargs, este debería estar instalado
+
+Y listo! Ya tienes todo lo que necesitas para poder tener esa información automáticamente :)
