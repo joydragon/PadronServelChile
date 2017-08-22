@@ -10,7 +10,7 @@ DEL_Archivos_Padron="./archivos.del"
 BASE_Padron_PDF="http://cdn.servel.cl/padronesauditados/padron/"
 
 wget -q "$URL_Archivos_Padron" -O "$XML_Archivos_Padron"
-xmlstarlet sel -t -m /Regiones/Region/comunas/comuna -v "concat(nomcomuna,'--',archcomuna)" -n archivos.xml > "$DEL_Archivos_Padron"
+xmlstarlet sel -t -m /Regiones/Region/comunas/comuna -v "concat(nomcomuna,'--',archcomuna)" -n "$XML_Archivos_Padron" > "$DEL_Archivos_Padron"
 
 while read LINEA
 do
@@ -24,3 +24,5 @@ do
                 /bin/bash ./parsear.sh "${COMUNA}.pdf" &
         fi
 done < "$DEL_Archivos_Padron"
+
+rm ${DEL_Archivos_Padron} ${XML_Archivos_Padron}
