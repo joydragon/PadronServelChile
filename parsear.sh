@@ -14,7 +14,7 @@ pdftotext -layout "$FILE" "$TXT_OUTPUT"
 FLAG=""
 REGION_RE="REGI.N\s*:\s*(.*)COMUNA"
 PROVINCIA_RE="PROVINCIA\s*:\s*(.*)\s*"
-DATOS_DIR_RE="^([^0-9]*)\s+([0-9]{1,2}\.[0-9]{3}\.[0-9]{3}-[0-9Kk])\s*(VAR|MUJ)\s+(.*)\s\s+([A-Za-z'Ññ()][A-Za-z'Ññ() -]+)\s\s+([0-9]+\s?[A-Z]?)$"
+DATOS_DIR_RE="^([^0-9]*)\s+([0-9]{0,2}\.?[0-9]{1-3}\.[0-9]{3}-[0-9Kk])\s*(VAR|MUJ)\s+(.*)\s\s+([A-Za-z'Ññ()][A-Za-z'Ññ() -]+)\s\s+([0-9]+\s?[A-Z]?)$"
 echo "NOMBRE,RUT,SEXO,REGION,PROVINCIA,COMUNA,DIRECCION,CIRCUNSCRIPCION,MESA" >> "$OUTPUT"
 while read LINEA
 do
