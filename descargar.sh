@@ -21,5 +21,6 @@ do
                 COMUNA=${BASH_REMATCH[1]}
                 ARCHIVO=${BASH_REMATCH[2]}
                 wget -q "${BASE_Padron_PDF}${ARCHIVO}" -O "${COMUNA}.pdf"
+                /bin/bash ./parsear.sh "${COMUNA}.pdf" &
         fi
 done < "$DEL_Archivos_Padron"
