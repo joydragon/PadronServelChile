@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# Para este script necesitas los siguientes ejecutables instalados:
+#       pdttotext
+
+hash pdftotext 2>/dev/null || { echo >&2 "Error: Necesito que este instalado el programa 'pdftotext'."; exit 1; }
 if [[ $# != 1 ]]
 then
         exit 1

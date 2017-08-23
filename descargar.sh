@@ -4,9 +4,11 @@
 # Para este script necesitas los siguientes ejecutables instalados:
 #       xmlstarlet
 
+hash xmlstarlet 2>/dev/null || { echo >&2 "Error: Necesito que este instalado el programa 'xmlstarlet'."; exit 1; }
+
 PARSE="no"
 while true; do
-	read -p "Quieres solo descargar (D) o pasarlo a CSV tambien (C) o salir (otro)? " opt
+	read -p "Quieres solo descargar (D)? o pasarlo a CSV tambien (C)? o salir (otro)? " opt
 	case $opt in
 	        [Dd]* ) break;;
 	        [Cc]* ) PARSE="yes";break;;
