@@ -8,7 +8,7 @@ Son sólo scripts en bash por lo que cualquier usuario de Linux (y probablemente
 Para usar los scripts sólo necesitas tener instalado lo siguiente:
 
 - xmlstarlet http://xmlstar.sourceforge.net/, este probablemente tengas que instalar
-- pdftotext, este está en la gran mayoría de las distros de Linux
+- pdftotext, es parte de poppler-utils (https://poppler.freedesktop.org/), y está disponible en la mayoría de las distros de Linux
 - wget, este debería estar instalado
 - sed, este debería estar instalado
 - xargs, este debería estar instalado
