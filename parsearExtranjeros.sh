@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# Para este script necesitas los siguientes ejecutables instalados:
+#       pdttotext
+
+hash pdftotext 2>/dev/null || { echo >&2 "Error: Necesito que este instalado el programa 'pdftotext'."; exit 1; }
 if [[ $# != 1 ]]
 then
         exit 1
@@ -13,11 +18,11 @@ pdftotext -layout "$FILE" "$TXT_OUTPUT"
 
 FLAG=""
 CIRCUNSCRIPCION_RE="CIRCUNSCRIPCI.N\s*:\s*(.*)\s*REGISTROS"
-DATOS_DIR_RE="^([^0-9]*)\s+([0-9]{0,2}\.?[0-9]{1,3}\.[0-9]{3}-[0-9Kk])\s*(VAR|MUJ)\s+(.*)\s\s+([A-Za-z'Ññ()][A-Za-z'Ññ() \/-]+)\s\s+([A-Za-z'Ññ()][A-Za-z'Ññ() \/-]+)\s\s+([0-9]+\s?[A-Z]?)$"
+DATOS_DIR_RE="^([^0-9]*)\s+([0-9]{0,2}\.?[0-9]{1,3}\.[0-9]{3}-[0-9Kk])\s*(VAR|MUJ)\s+(.*)\s\s+([A-Za-z'Ññ()][A-Za-z'Ññ() \/-]+)\s\s+([0-9A-Za-z'Ññ()][0-9A-Za-z'Ññ() \/.,-]+)\s\s+([0-9]+\s?[A-Z]?)$"
 echo "NOMBRE,RUT,SEXO,DIRECCION,PAIS,CIUDAD,MESA" >> "$OUTPUT"
 while read LINEA
 do
-        if [[ $LINEA =~ ^REP.BLICA ]]
+        if [[ $LINEA =~ ^.?REP.BLICA ]]
         then
                 FLAG=""
         elif [[ $LINEA =~ ^NOMBRE ]]
@@ -39,6 +44,8 @@ do
                         CIUDAD=`echo ${BASH_REMATCH[6]} | xargs -0`
                         MESA="${BASH_REMATCH[7]}"
                         echo "\"${NOMBRE}\",\"${RUT}\",\"${SEXO}\",\"${DIRECCION}\",\"${PAIS}\",\"${CIUDAD}\",\"${CIRCUNSCRIPCION}\",\"${MESA}\"" >> "$OUTPUT"
+                else
+                        echo $LINEA >> revision_errores.txt
                 fi
         fi
 done < "$TXT_OUTPUT"
