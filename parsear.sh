@@ -23,12 +23,14 @@ DATOS_DIR_RE="^([^0-9]*)\s+([0-9]{0,2}\.?[0-9]{1,3}\.[0-9]{3}-[0-9Kk])\s*(VAR|MU
 echo "NOMBRE,RUT,SEXO,REGION,PROVINCIA,COMUNA,DIRECCION,CIRCUNSCRIPCION,MESA" >> "$OUTPUT"
 while read LINEA
 do
-        if [[ $LINEA =~ ^REP.BLICA ]]
+        if [[ $LINEA =~ ^.?REP.BLICA ]]
         then
                 FLAG=""
+		continue
         elif [[ $LINEA =~ ^NOMBRE ]]
         then
                 FLAG="NOMBRE"
+		continue
         fi
         if [[ $FLAG == "" && $LINEA =~ $REGION_RE ]]
         then
@@ -47,6 +49,8 @@ do
                         CIRCUNSCRIPCION=`echo ${BASH_REMATCH[5]} | xargs -0`
                         MESA="${BASH_REMATCH[6]}"
                         echo "\"${NOMBRE}\",\"${RUT}\",\"${SEXO}\",\"${REGION}\",\"${PROVINCIA}\",\"${COMUNA}\",\"${DIRECCION}\",\"${CIRCUNSCRIPCION}\",\"${MESA}\"" >> "$OUTPUT"
+		else
+			echo "$OUTPUT: $LINEA" >> error_parseo.log
                 fi
         fi
 done < "$TXT_OUTPUT"
